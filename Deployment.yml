@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webtest
+  labels:
+    app: webtest
+spec:
+  replicas: 2
+  selector:
+   matchLabels:
+     app: webtest
+     tier: production
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: webtest
+        tier: production
+    spec:
+       containers:
+       - image: gauravmehta13/apache-webserver
+         name: webtest
+         ports:
+         - containerPort: 80
+           name: webtest
